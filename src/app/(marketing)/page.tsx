@@ -3,7 +3,7 @@ import { HeroScrollTrigger } from "@/components/animations/HeroScrollTrigger";
 import { TrustMarquee } from "@/components/animations/Marquee";
 import { CircularSlider } from "@/components/animations/CircularSlider";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
-import { MOCK_PRODUCTS, TESTIMONIALS, BLOG_POSTS } from "@/lib/mock-data";
+import { TESTIMONIALS } from "@/lib/mock-data";
 import { HomeSections } from "@/components/home/HomeSections";
 
 export const metadata: Metadata = {
@@ -41,17 +41,24 @@ function HomeSchema() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
 
-export default function HomePage() {
+import { getFeaturedProducts, getBlogPosts } from "@/lib/data";
+
+export default async function HomePage() {
+  const [featuredProducts, blogPosts] = await Promise.all([
+    getFeaturedProducts(),
+    getBlogPosts()
+  ]);
+
   return (
     <>
       <HomeSchema />
       <HeroScrollTrigger />
       <TrustMarquee />
-      <CircularSlider />
+      <CircularSlider products={featuredProducts} />
       <HomeSections
-        products={MOCK_PRODUCTS}
+        products={featuredProducts}
         testimonials={TESTIMONIALS}
-        blogPosts={BLOG_POSTS}
+        blogPosts={blogPosts}
       />
     </>
   );

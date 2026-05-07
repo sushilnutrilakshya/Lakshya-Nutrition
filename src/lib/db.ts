@@ -1,10 +1,27 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
+import * as schema from "./db-schema";
 
-const connectionString = process.env.DATABASE_URL || "postgres://postgres:postgres@localhost:5432/lakshya";
+/**
+ * Neon Serverless PostgreSQL Connection
+ *
+ * Uses the @neondatabase/serverless driver for edge-compatible,
+ * connection-pooled access to Neon's managed Postgres.
+ *
+ * Set DATABASE_URL in .env.local to your Neon connection string:
+ *   DATABASE_URL=postgresql://user:pass@ep-xxx.region.aws.neon.tech/dbname?sslmode=require
+ */
+const connectionString = process.env.DATABASE_URL;
 
-// Initialize the Postgres client
-const client = postgres(connectionString, { prepare: false });
+if (!connectionString) {
+  console.warn(
+    "[db] DATABASE_URL is not set. Database operations will fail at runtime. " +
+      "Create a free Neon database at https://neon.tech and set DATABASE_URL in .env.local"
+  );
+}
 
-// Initialize Drizzle ORM
-export const db = drizzle(client);
+// Create the Neon HTTP query function (edge-compatible, no persistent connections)
+const sql = neon(connectionString ?? "");
+
+// Initialize Drizzle ORM with the Neon driver and our schema
+export const db = drizzle(sql, { schema });

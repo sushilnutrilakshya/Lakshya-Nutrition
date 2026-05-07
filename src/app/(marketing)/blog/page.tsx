@@ -1,19 +1,21 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BookOpen, FlaskConical } from "lucide-react";
-import { BLOG_POSTS } from "@/lib/mock-data";
+import { getBlogPosts } from "@/lib/data";
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts();
+
   const blogListSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "Lakshya Nutrition Science Library",
     description: "Evidence-based insights into performance, recovery, and absolute biological optimization.",
-    blogPost: BLOG_POSTS.map((post) => ({
+    blogPost: blogPosts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
       description: post.excerpt,
-      datePublished: "2026-01-01",
+      datePublished: post.date,
       author: { "@type": "Organization", name: "Lakshya Nutrition Research Lab" },
     })),
   };
@@ -64,7 +66,7 @@ export default function BlogPage() {
           style={{ maxWidth: "1152px", marginLeft: "auto", marginRight: "auto" }}
         >
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {BLOG_POSTS.map((post) => (
+            {blogPosts.map((post) => (
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}

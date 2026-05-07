@@ -7,12 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:push": "npx drizzle-kit push",
+    "db:studio": "npx drizzle-kit studio",
+    "db:seed": "npx tsx scripts/seed.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
     "@hookform/resolvers": "^5.2.2",
     "@medusajs/js-sdk": "^2.13.5",
+    "@neondatabase/serverless": "^1.1.0",
     "@sentry/nextjs": "^10.47.0",
     "@serwist/next": "^9.5.7",
     "@tanstack/react-query": "^5.62.0",
@@ -38,9 +44,12 @@
     "@types/node": "^20.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.1.0",
     "tailwindcss": "^4.0.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.6.0"
   }
 }

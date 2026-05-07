@@ -1,18 +1,18 @@
-﻿"use client";
+"use client";
 
 import { use } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, Clock, Calendar, User, Share2 } from "lucide-react";
-import { BLOG_POSTS } from "@/lib/mock-data";
+import { getBlogPostBySlug } from "@/lib/data";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = use(params);
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) notFound();
 

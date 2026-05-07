@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { type Product } from "@/types/product";
-import { MOCK_PRODUCTS } from "@/lib/mock-data";
 
 type SlidePosition = "active" | "previous" | "next" | "prev-far" | "next-far" | "inactive";
 
@@ -64,11 +63,11 @@ function SlideCard({ product, position, onActivate }: { product: Product; positi
   );
 }
 
-export function CircularSlider() {
+export function CircularSlider({ products }: { products: Product[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const products = MOCK_PRODUCTS.slice(0, 7);
-  const total = products.length;
+  const sliderProducts = products.slice(0, 7);
+  const total = sliderProducts.length;
 
   const next = useCallback(() => setActiveIndex((prev) => (prev + 1) % total), [total]);
   const prev = useCallback(() => setActiveIndex((prev) => (prev - 1 + total) % total), [total]);
@@ -122,7 +121,7 @@ export function CircularSlider() {
             aria-label="Product carousel"
             aria-live="polite"
           >
-            {products.map((product, i) => (
+            {sliderProducts.map((product, i) => (
               <SlideCard
                 key={product.id}
                 product={product}
@@ -144,7 +143,7 @@ export function CircularSlider() {
               <ChevronLeft size={18} />
             </button>
             <div className="flex gap-2">
-              {products.map((_, i) => (
+              {sliderProducts.map((_, i) => (
                 <button
                   key={i}
                   type="button"

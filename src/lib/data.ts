@@ -38,7 +38,7 @@ function mapProductToFrontend(
   }));
 
   // Process ingredients / nutrition facts from metadata if they exist
-  const metadata = (dbProduct.metadata as Record<string, any>) || {};
+  const metadata = (dbProduct.metadata as Record<string, unknown>) || {};
 
   return {
     id: dbProduct.id.toString(),

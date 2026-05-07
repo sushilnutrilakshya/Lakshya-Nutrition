@@ -263,18 +263,4 @@ export const orderItemsRelations = relations(orderItems, ({ one }) => ({
     fields: [orderItems.variantId],
     references: [productVariants.id],
   }),
- e x p o r t   c o n s t   p r o d u c t V a r i a n t s R e l a t i o n s   =   r e l a t i o n s ( p r o d u c t V a r i a n t s ,   ( {   o n e   } )   = >   ( { 
-     p r o d u c t :   o n e ( p r o d u c t s ,   { 
-         f i e l d s :   [ p r o d u c t V a r i a n t s . p r o d u c t I d ] , 
-         r e f e r e n c e s :   [ p r o d u c t s . i d ] , 
-     } ) , 
- } ) ) ; 
- 
- e x p o r t   c o n s t   p r o d u c t H i g h l i g h t s R e l a t i o n s   =   r e l a t i o n s ( p r o d u c t H i g h l i g h t s ,   ( {   o n e   } )   = >   ( { 
-     p r o d u c t :   o n e ( p r o d u c t s ,   { 
-         f i e l d s :   [ p r o d u c t H i g h l i g h t s . p r o d u c t I d ] , 
-         r e f e r e n c e s :   [ p r o d u c t s . i d ] , 
-     } ) , 
- } ) ) ; 
-  
- 
+}));

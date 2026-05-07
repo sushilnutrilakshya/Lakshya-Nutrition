@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lakshya Nutrition
 
-## Getting Started
+Premium sports nutrition headless e-commerce built with Next.js 15, React 19, Tailwind CSS v4, and GSAP.
 
-First, run the development server:
+## Tech Stack
+- Frontend: Next.js 15 (App Router, React 19)
+- Styling: Tailwind CSS v4
+- Animation: GSAP 3.12+ (ScrollTrigger)
+- State: Zustand (Client), React Query (Server)
+- Commerce & APIs: Mocked (ready for Medusa v2 integration)
+- Payments: Razorpay
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Quick Start
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Setup environment variables:
+   ```bash
+   cp .env.local.example .env.local
+   ```
+   Add your testing Razorpay keys to `.env.local`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+## Development Commands
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev` - Start dev server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run type-check` - Run TypeScript compiler checks
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Backend Mode
+By default, the application runs using comprehensive mock data found in `src/lib/constants.ts`. To integrate the real Medusa v2 backend:
+1. Ensure the Medusa backend is running.
+2. Update the environment variables with the backend API URL.
+3. Replace the mock data fetches in the frontend with the actual API calls.

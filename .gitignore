@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Build & lint output logs (local dev only)
+build-errors.txt
+build_output.txt
+lint_output.txt
+ts-error.log
+type-errors.txt
+tailwindcss-*.log
+
+# Editor & tool configs (local only)
+.kiro/
+.vscode/
